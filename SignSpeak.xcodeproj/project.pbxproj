@@ -11,6 +11,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		E215868D2D6DEFF80080940F /* CoreMLModel */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CoreMLModel;
+			sourceTree = "<group>";
+		};
 		E2EF2C262D6BC1B300FE4B08 /* SignSpeak */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SignSpeak;
@@ -32,6 +37,7 @@
 		E2EF2C1B2D6BC1B300FE4B08 = {
 			isa = PBXGroup;
 			children = (
+				E215868D2D6DEFF80080940F /* CoreMLModel */,
 				E2EF2C262D6BC1B300FE4B08 /* SignSpeak */,
 				E2EF2C252D6BC1B300FE4B08 /* Products */,
 			);
@@ -61,6 +67,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				E215868D2D6DEFF80080940F /* CoreMLModel */,
 				E2EF2C262D6BC1B300FE4B08 /* SignSpeak */,
 			);
 			name = SignSpeak;
