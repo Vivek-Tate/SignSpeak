@@ -9,7 +9,7 @@ import SwiftUI
 struct CameraView: View {
     
     // MARK: Stored Properties
-    @StateObject private var cameraController = CameraViewController()
+    @StateObject private var cameraController = CameraController()
 
     var body: some View {
         ZStack {

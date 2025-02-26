@@ -1,5 +1,5 @@
 //
-//  CameraViewController.swift
+//  CameraController.swift
 //  SignSpeak
 //
 //  Created by Vivek Tate on 26-02-2025.
@@ -8,7 +8,7 @@
 import AVFoundation
 import SwiftUI
 
-class CameraViewController: NSObject, ObservableObject {
+class CameraController: NSObject, ObservableObject {
     
     // MARK: Private Properties
     let session = AVCaptureSession()
@@ -30,7 +30,7 @@ class CameraViewController: NSObject, ObservableObject {
 }
 
 // MARK: Public Methods
-extension CameraViewController {
+extension CameraController {
     
     /// Starts the camera session
     func startCameraSession() {
@@ -61,7 +61,7 @@ extension CameraViewController {
             device.unlockForConfiguration()
         } catch {
             
-            print("ERROR: CameraViewController - toggleCamerFlash() - \(error.localizedDescription)")
+            print("ERROR: CameraController - toggleCamerFlash() - \(error.localizedDescription)")
         }
     }
     
@@ -87,7 +87,7 @@ extension CameraViewController {
                 }
             } catch {
                 
-                print("ERROR: CameraViewController - switchCamera() - \(error.localizedDescription)")
+                print("ERROR: CameraController - switchCamera() - \(error.localizedDescription)")
             }
         }
 
@@ -98,12 +98,12 @@ extension CameraViewController {
     func startRecording() {
         
         // TODO: Implement video recording logic
-        print("SUCESS: CameraViewController - startRecording()")
+        print("SUCESS: CameraController - startRecording()")
     }
 }
 
 // MARK: CaptureVideoDataOutputSampleBufferDelegate Methods
-extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
     
     /// Captures frames from the video stream (this is where you process ASL recognition)
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -117,7 +117,7 @@ extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
 }
 
 // MARK: Private Methods
-extension CameraViewController {
+extension CameraController {
     
     /// Configures Camera Session
     private func configureCameraSession() {
@@ -139,7 +139,7 @@ extension CameraViewController {
                     videoDeviceInput = videoInput
                 }
                 
-            } catch { print("ERROR: CameraViewController - configureCameraSession() - \(error.localizedDescription)") }
+            } catch { print("ERROR: CameraController - configureCameraSession() - \(error.localizedDescription)") }
         }
 
         // Set Video Output
