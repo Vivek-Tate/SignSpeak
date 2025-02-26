@@ -40,9 +40,15 @@ extension ASLModelController {
             
             let maxIndex = getHighestProbabilityIndex(from: outputArray)
             
+            guard maxIndex >= 0, maxIndex < modelClasses.count else {
+                
+                print("ERROR: ASLModelController - predictASLSign(): Model output index \(maxIndex) is out of range!")
+                return nil
+            }
             return modelClasses[maxIndex]
             
         } catch {
+            
             print("ERROR: ASLModelController - predictASLSign(): \(error)")
             return nil
         }

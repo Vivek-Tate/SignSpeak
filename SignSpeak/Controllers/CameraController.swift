@@ -16,6 +16,7 @@ class CameraController: NSObject, ObservableObject {
     private var videoDeviceInput: AVCaptureDeviceInput?
     private let videoDataOutput = AVCaptureVideoDataOutput()
     private let sessionQueue = DispatchQueue(label: "com.VivekTate.SignSpeak.sessionQueue")
+    private let modelController = ASLModelController()
 
     // MARK: Stored Properties
     @Published var isFlashEnabled: Bool = false
@@ -108,10 +109,15 @@ extension CameraController: AVCaptureVideoDataOutputSampleBufferDelegate {
     /// Captures frames from the video stream (this is where you process ASL recognition)
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         
-        // TODO: Process the sample buffer for ASL sign recognition
-        DispatchQueue.main.async {
-            
-            self.detectedSentence = "Processing..."
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer),
+                      let multiArrayInput = pixelBuffer.toMLMultiArray() else { return }
+        
+        DispatchQueue.global(qos: .userInteractive).async {
+            if let sign = self.modelController.predictASLSign(from: multiArrayInput) {
+                DispatchQueue.main.async {
+                    self.detectedSentence = "Detected: \(sign)"
+                }
+            }
         }
     }
 }
