@@ -17,10 +17,12 @@ struct CameraView: View {
             // Add CameraPreview to show live camera feed
             CameraPreview(session: cameraController.session)
                 .edgesIgnoringSafeArea(.all)
-
+            
             VStack {
+                
                 Spacer()
-
+                VStack {
+                
                 // Camera Control Panel
                 HStack {
                     
@@ -31,18 +33,18 @@ struct CameraView: View {
                             .font(.title)
                             .padding()
                     }
-
+                    
                     Spacer()
-
+                    
                     Button(action: { cameraController.startRecording() }) {
                         Image(systemName: "record.circle")
                             .foregroundStyle(.red)
                             .font(.largeTitle)
                             .padding()
                     }
-
+                    
                     Spacer()
-
+                    
                     Button(action: { cameraController.switchCamera() }) {
                         Image(systemName: "arrow.triangle.2.circlepath.camera")
                             .foregroundStyle(.white)
@@ -52,13 +54,19 @@ struct CameraView: View {
                 }
                 .padding(.horizontal, 30)
                 .padding(.bottom, 50)
+                
+                // American Sign Language Translated Text Section
+                Text(cameraController.detectedSentence)
+                    .frame(maxWidth: .infinity, minHeight: 100)
+                    .padding()
+                    .background(Color.black.opacity(0.5))
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .padding(.bottom, 20)
             }
         }
-        .onAppear {
-            cameraController.startCameraSession()
-        }
-        .onDisappear {
-            cameraController.stopCameraSession()
-        }
+    }
+        .onAppear { cameraController.startCameraSession() }
+        .onDisappear { cameraController.stopCameraSession() }
     }
 }
