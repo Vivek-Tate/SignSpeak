@@ -53,7 +53,7 @@ extension CameraController {
     func toggleCameraFlash() {
         
         // Checks for torch available
-        guard let device = captureDevice, device.hasTorch else { return }
+        guard let device = captureDevice, device.hasTorch, device.position == .back else { return }
         do {
             
             try device.lockForConfiguration()

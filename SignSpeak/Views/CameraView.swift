@@ -42,7 +42,7 @@ struct CameraView: View {
                     onFlashToggle: { cameraController.toggleCameraFlash() },
                     onSwitchCamera: { cameraController.switchCamera() }
                 )
-                .padding(.bottom, 30)
+                .padding(.bottom, 10)
             }
             .padding()
         }
