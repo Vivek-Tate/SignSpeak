@@ -12,7 +12,6 @@ class CameraController: NSObject, ObservableObject {
     
     // MARK: Private Properties
     let session = AVCaptureSession()
-    private var captureDevice: AVCaptureDevice?
     private var videoDeviceInput: AVCaptureDeviceInput?
     private let videoDataOutput = AVCaptureVideoDataOutput()
     private let sessionQueue = DispatchQueue(label: "com.VivekTate.SignSpeak.sessionQueue")
@@ -53,7 +52,8 @@ extension CameraController {
     func toggleCameraFlash() {
         
         // Checks for torch available
-        guard let device = captureDevice, device.hasTorch, device.position == .back else { return }
+        guard let device = videoDeviceInput?.device , device.position == .back, device.hasTorch else { return }
+        
         do {
             
             try device.lockForConfiguration()
@@ -135,7 +135,6 @@ extension CameraController {
         // Set Camera Device
         if let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) {
             
-            captureDevice = device
             do {
                 
                 let videoInput = try AVCaptureDeviceInput(device: device)
