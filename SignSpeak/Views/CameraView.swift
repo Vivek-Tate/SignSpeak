@@ -4,69 +4,50 @@
 //
 //  Created by Vivek Tate on 26-02-2025.
 //
+
 import SwiftUI
+import AVFoundation
 
 struct CameraView: View {
     
-    // MARK: Stored Properties
     @StateObject private var cameraController = CameraController()
-
+    
     var body: some View {
         ZStack {
             
-            // Add CameraPreview to show live camera feed
+            // Live Camera Preview
             CameraPreview(session: cameraController.session)
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
                 
                 Spacer()
-                VStack {
                 
-                // Camera Control Panel
+                // Detected Sign Language Text Display
                 HStack {
-                    
-                    Button(action: { cameraController.toggleCameraFlash() }) {
-                        
-                        Image(systemName: cameraController.isFlashEnabled ? "bolt.fill" : "bolt.slash")
-                            .foregroundStyle(.white)
-                            .font(.title)
-                            .padding()
-                    }
-                    
-                    Spacer()
-                    
-                    Button(action: { cameraController.startRecording() }) {
-                        Image(systemName: "record.circle")
-                            .foregroundStyle(.red)
-                            .font(.largeTitle)
-                            .padding()
-                    }
-                    
-                    Spacer()
-                    
-                    Button(action: { cameraController.switchCamera() }) {
-                        Image(systemName: "arrow.triangle.2.circlepath.camera")
-                            .foregroundStyle(.white)
-                            .font(.title)
-                            .padding()
-                    }
+                    Text(cameraController.detectedSentence)
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                        .foregroundStyle(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(.ultraThinMaterial)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .shadow(radius: 5)
                 }
-                .padding(.horizontal, 30)
-                .padding(.bottom, 50)
+                .padding(.horizontal, 16)
                 
-                // American Sign Language Translated Text Section
-                Text(cameraController.detectedSentence)
-                    .frame(maxWidth: .infinity, minHeight: 100)
-                    .padding()
-                    .background(Color.black.opacity(0.5))
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding(.bottom, 20)
+                // Camera Controls (Floating Action Buttons)
+                CameraControlsView(
+                    onRecord: { cameraController.startRecording() },
+                    onFlashToggle: { cameraController.toggleCameraFlash() },
+                    onSwitchCamera: { cameraController.switchCamera() }
+                )
+                .padding(.bottom, 30)
             }
+            .padding()
         }
-    }
-        .onAppear { cameraController.startCameraSession() }
-        .onDisappear { cameraController.stopCameraSession() }
+        .onAppear {
+            cameraController.startCameraSession()
+        }
     }
 }
