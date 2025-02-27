@@ -11,11 +11,10 @@ struct LaunchScreenView: View {
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            Text("SignSpeak")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundStyle(.white)
-                
+            Image("SignSpeak-Banner")
+                .resizable()
+                .scaledToFill()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }
