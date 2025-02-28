@@ -1,6 +1,4 @@
-# **SignSpeak - Sign Language Translator**
-
-## **An AI-powered Sign Language Recognition App for iOS**
+# **SignSpeak - An AI-powered Sign Language Recognition App for iOS**
 
 SignSpeak is a cutting-edge **iOS application** that utilizes **Machine Learning** and **Computer Vision** to translate **American Sign Language (ASL)** gestures into text in real-time. This app empowers **deaf** by facilitating seamless communication through AI-driven sign detection.
 
@@ -16,14 +14,14 @@ SignSpeak is a cutting-edge **iOS application** that utilizes **Machine Learning
 
 ### **Additional Features**
 
-- 🔐 **Privacy-First Approach**: No data is stored or shared.
-- 🌐 **Material-Style UI/UX**: Designed for an intuitive user experience.
-- ⏳ **Optimized for Performance**: Uses Apple's **CoreML for on-device AI processing**.
-- 📲 **Supports iOS/iPadOS 15+**: Runs smoothly on iPhones, iPads.
+- **Privacy-First Approach**: No data is stored or shared.
+- **Material-Style UI/UX**: Designed for an intuitive user experience.
+- **Optimized for Performance**: Uses Apple's **CoreML for on-device AI processing**.
+- **Supports iOS/iPadOS 15+**: Runs smoothly on iPhones, iPads.
 
 ---
 
-## **⚡ Technology Stack**
+## **Technology Stack**
 
 | Component             | Technology Used                    |
 | --------------------- | ---------------------------------- |
@@ -36,30 +34,15 @@ SignSpeak is a cutting-edge **iOS application** that utilizes **Machine Learning
 
 ---
 
-## **📂 Folder Structure**
+## **Getting Started**
 
-```
-SignSpeak/
-│── Models/                # CoreML Model & ASL Gesture Mapping
-│── Views/                 # SwiftUI Views (Camera, Controls, Text Display)
-│── Controllers/           # Camera Controller, ASL Model Controller
-│── Assets/                # Images, Icons, Assets
-│── SignSpeakApp.swift     # Entry Point (SwiftUI App)
-│── Info.plist             # Privacy Permissions
-└── README.md              # Project Documentation
-```
-
----
-
-## **🚀 Getting Started**
-
-### **🔹 Prerequisites**
+### **Prerequisites**
 
 - macOS 13+ with **Xcode 15+** installed.
 - iPhone with **iOS 15+** for on-device testing.
 - **Swift Package Manager (SPM)** for dependency management.
 
-### **🔹 Installation**
+### **Installation**
 
 1. **Clone the repository**
 
@@ -81,7 +64,7 @@ open SignSpeak.xcodeproj
 
 ---
 
-## **🛠️ Permissions Required**
+## **Permissions Required**
 
 To run SignSpeak, add these **privacy descriptions** in `Info.plist`:
 
@@ -90,17 +73,11 @@ To run SignSpeak, add these **privacy descriptions** in `Info.plist`:
 <string>SignSpeak uses your camera for sign language recognition.</string>
 ```
 
-> 📌 **Note**: The app does NOT record or store any images.
+> **Note**: The app does NOT record or store any images.
 
 ---
 
-## **🧑‍🎓 Contributing**
-
-**Want to improve SignSpeak?** Contributions are welcome!
-
----
-
-## **📝 License**
+## **License**
 See the full [**LICENSE**](https://github.com/Vivek-Tate/SignSpeak/blob/main/LICENSE) for details.
 
 ---
