@@ -101,6 +101,24 @@ extension CameraController {
         // TODO: Implement video recording logic
         print("SUCESS: CameraController - startRecording()")
     }
+    
+    func setZoom(_ zoomFactor: CGFloat) {
+        guard let device = videoDeviceInput?.device else { return }
+        
+        do {
+            try device.lockForConfiguration()
+            
+            // Ensure the zoom factor stays within the allowed range
+            let safeZoomFactor = max(1.0, min(zoomFactor, device.activeFormat.videoMaxZoomFactor))
+            
+            device.videoZoomFactor = safeZoomFactor
+            device.unlockForConfiguration()
+                        
+        } catch {
+            print("ERROR: CameraController - setZoom() - \(error.localizedDescription)")
+        }
+    }
+
 }
 
 // MARK: CaptureVideoDataOutputSampleBufferDelegate Methods

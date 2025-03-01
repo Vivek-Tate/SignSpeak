@@ -10,7 +10,9 @@ import AVFoundation
 
 struct CameraView: View {
     
+    // MARK: Private Properties
     @StateObject private var cameraController = CameraController()
+    @State private var zoomLevel: CGFloat = 1.0
     
     var body: some View {
         ZStack {
@@ -18,6 +20,7 @@ struct CameraView: View {
             // Live Camera Preview
             CameraPreview(session: cameraController.session)
                 .edgesIgnoringSafeArea(.all)
+                .scaleEffect(zoomLevel)
             
             VStack {
                 
@@ -36,6 +39,31 @@ struct CameraView: View {
                 }
                 .padding(.horizontal, 16)
                 
+                // Zoom Control Buttons
+                HStack {
+                    Button(action: {
+                        setZoomLevel(1.0)
+                    }) {
+                        Text("1x")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(zoomLevel == 1.0 ? .yellow : .white)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).fill(Color.black.opacity(0.6)))
+                    }
+                    
+                    Button(action: {
+                        setZoomLevel(2.0)
+                    }) {
+                        Text("2x")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(zoomLevel == 2.0 ? .yellow : .white)
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).fill(Color.black.opacity(0.6)))
+                    }
+                }
+                .padding(.bottom, 10)
+
+
                 // Camera Controls (Floating Action Buttons)
                 CameraControlsView(
                     onRecord: { cameraController.startRecording() },
@@ -49,5 +77,15 @@ struct CameraView: View {
         .onAppear {
             cameraController.startCameraSession()
         }
+    }
+}
+
+// MARK: Private Methods
+extension CameraView {
+    
+    /// Function to set camera zoom level
+    private func setZoomLevel(_ level: CGFloat) {
+        cameraController.setZoom(level)
+        zoomLevel = level
     }
 }
